@@ -60,6 +60,22 @@ GO
 
 SELECT * FROM Usuario
 SELECT * FROM Mensagem
+
+CREATE TABLE Exercicios(
+	id int IDENTITY PRIMARY KEY,
+	nivel varchar(25) not null,
+	serie int not null,
+	repeticoes int not null,
+	instrucoes varchar(500) not null,
+	/* video */
+)
+CREATE TABLE ExercicioFeito(
+id int IDENTITY PRIMARY KEY,
+usuarioId int references Usuario(id),
+exerciciosId int references Exercicios(id),
+data smallDateTime
+)
+
 /*
 CREATE TABLE Cardapio
 (
