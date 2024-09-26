@@ -27,7 +27,7 @@ public class MensagemService {
 			mensagens = mensagemRepository.findAll();
 		}
 		else {
-			mensagens = mensagemRepository.findAllByEmissorMensagem(emissorMensagem);
+			mensagens = mensagemRepository.findByEmail(emissorMensagem);
 		}
 		return mensagens;
 	}

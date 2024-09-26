@@ -1,6 +1,7 @@
 package br.itb.projeto.fitBalance.model.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -8,6 +9,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,11 +26,20 @@ public class Usuario {
 	private String nome;
 	private String email;
 	private String senha;
-	private String nivelAcesso;
+	private String nivelAcesso = "USER";
 	private byte[] foto;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy hh:mm:ss")
-	private LocalDateTime dataCadastro;
+	@ManyToMany
+	@JoinTable(name = "ExercicioMarcado" , joinColumns = @JoinColumn(name = "usuarioId") , inverseJoinColumns = @JoinColumn(name = "exerciciosId"))
+	private List<Exercicios> exercicios;
+	
+	public List<Exercicios> getExercicios() {
+		return exercicios;
+	}
+	public void setExercicios(List<Exercicios> exercicios) {
+		this.exercicios = exercicios;
+	}
+	private LocalDateTime dataNascimento;
 	private String statusUsuario;
 	// Source -> Generate Getters and Setters...
 	public long getId() {
@@ -64,11 +78,11 @@ public class Usuario {
 	public void setFoto(byte[] foto) {
 		this.foto = foto;
 	}
-	public LocalDateTime getDataCadastro() {
-		return dataCadastro;
+	public LocalDateTime getDataNascimento() {
+		return dataNascimento;
 	}
-	public void setDataCadastro(LocalDateTime dataCadastro) {
-		this.dataCadastro = dataCadastro;
+	public void setDataNascimento(LocalDateTime dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 	public String getStatusUsuario() {
 		return statusUsuario;

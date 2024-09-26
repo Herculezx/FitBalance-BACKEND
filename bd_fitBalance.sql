@@ -26,6 +26,9 @@ CREATE TABLE Usuario
 )
 GO
 
+ALTER TABLE Usuario ADD dataNascimento SMALLDATETIME not null DEFAULT getDate() 
+ALTER TABLE Usuario DROP COLUMN dataCadastro
+
 /* Teste */
 
 INSERT Usuario (nome, email, senha, nivelAcesso, foto, dataCadastro, statusUsuario)
@@ -60,21 +63,32 @@ GO
 
 SELECT * FROM Usuario
 SELECT * FROM Mensagem
+select * from Exercicios
 
 CREATE TABLE Exercicios(
 	id int IDENTITY PRIMARY KEY,
 	nivel varchar(25) not null,
 	serie int not null,
 	repeticoes int not null,
+	nome varchar(100) not null ,
 	instrucoes varchar(500) not null,
 	/* video */
 )
+
 CREATE TABLE ExercicioFeito(
 id int IDENTITY PRIMARY KEY,
 usuarioId int references Usuario(id),
 exerciciosId int references Exercicios(id),
 data smallDateTime
 )
+
+CREATE TABLE ExercicioMarcado(
+id int IDENTITY PRIMARY KEY,
+usuarioId int references Usuario(id),
+exerciciosId int references Exercicios(id),
+)
+
+select * from ExercicioMarcado
 
 /*
 CREATE TABLE Cardapio

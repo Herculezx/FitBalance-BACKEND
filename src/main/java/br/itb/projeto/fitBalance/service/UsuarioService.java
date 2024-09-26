@@ -57,7 +57,6 @@ public class UsuarioService {
 					.encodeToString(usuario.getSenha().getBytes());
 			
 			usuario.setSenha(senha);
-			usuario.setDataCadastro(LocalDateTime.now());
 			usuario.setStatusUsuario("ATIVO");
 			
 			return usuarioRepository.save(usuario);
@@ -74,11 +73,17 @@ public class UsuarioService {
 			.encodeToString(usuario.getSenha().getBytes());
 		
 		usuario.setSenha(senha);
-		usuario.setDataCadastro(LocalDateTime.now());
 		usuario.setStatusUsuario("ATIVO");
 		
 		return usuarioRepository.save(usuario);
 	}
+	
+	@Transactional
+	public Usuario salvar(Usuario usuario) {
+		
+		return usuarioRepository.save(usuario);
+	}
+	
 	
 	@Transactional
 	public Usuario signin(String email, String senha) {
@@ -121,7 +126,6 @@ public class UsuarioService {
 					.encodeToString("12345678".getBytes());
 				
 			usuarioAtualizado.setSenha(senha);
-			usuarioAtualizado.setDataCadastro(LocalDateTime.now());
 			usuarioAtualizado.setStatusUsuario("ATIVO");
 			
 			return usuarioRepository.save(usuarioAtualizado);
@@ -140,7 +144,6 @@ public class UsuarioService {
 					.encodeToString(usuario.getSenha().getBytes());
 				
 			usuarioAtualizado.setSenha(senha);
-			usuarioAtualizado.setDataCadastro(LocalDateTime.now());
 			usuarioAtualizado.setStatusUsuario("ATIVO");
 			
 			return usuarioRepository.save(usuarioAtualizado);

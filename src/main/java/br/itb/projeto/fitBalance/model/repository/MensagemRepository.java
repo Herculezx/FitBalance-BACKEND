@@ -10,4 +10,5 @@ import br.itb.projeto.fitBalance.model.entity.Mensagem;
 @Repository
 public interface MensagemRepository extends JpaRepository<Mensagem, Long> {
 	List<Mensagem> findAllByEmissorMensagem(String emissorMensagem);
+	List<Mensagem> findByEmail(String email);
 }

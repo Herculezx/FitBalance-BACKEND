@@ -64,10 +64,12 @@ public class UsuarioController {
 
 	@PostMapping("create")
 	public ResponseEntity<?> create(@RequestBody Usuario usuario) {
+		
+		System.out.println("_usuario " + usuario.getDataNascimento());
 
 		Usuario _usuario = usuarioService.createNew(usuario);
 		
-		System.out.println("_usuario " + _usuario);
+		
 		
 		if (_usuario == null) {
 			System.out.println("_usuario 2" + _usuario);
