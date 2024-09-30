@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import br.itb.projeto.fitBalance.model.entity.Exercicios;
+import br.itb.projeto.fitBalance.model.entity.Mensagem;
 import br.itb.projeto.fitBalance.model.repository.ExerciciosRepository;
 import jakarta.transaction.Transactional;
 
@@ -31,15 +32,24 @@ public class ExerciciosService {
 	}
 	
 	@Transactional
-	public Exercicios inativar(long id) {
-		Optional<Exercicios> _exercicios = 
-				exerciciosRepository.findById(id);
-		return null;
+	public void deleteById(long id) {
+		System.out.println(id);
+		exerciciosRepository.deleteById(id);
+
 	}
 	
 	@Transactional
 	public Exercicios alterar( Exercicios exercicios) {
 		return exerciciosRepository.save(exercicios);
 		
+	}
+	
+	public Exercicios findById(long id) {
+		Optional<Exercicios> _exercicios= exerciciosRepository.findById(id);
+		if (_exercicios.isPresent()) {
+			Exercicios exercicios = _exercicios.get();
+			return exercicios;
+		}
+		return null;
 	}
 }

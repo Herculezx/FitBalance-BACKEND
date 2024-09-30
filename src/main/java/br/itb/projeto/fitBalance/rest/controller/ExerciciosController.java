@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +17,7 @@ import org.springframework.web.multipart.support.RequestPartServletServerHttpReq
 import br.itb.projeto.fitBalance.model.entity.Exercicios;
 import br.itb.projeto.fitBalance.model.entity.Mensagem;
 import br.itb.projeto.fitBalance.model.entity.Usuario;
+import br.itb.projeto.fitBalance.rest.exception.ResourceNotFoundException;
 import br.itb.projeto.fitBalance.rest.response.MessageResponse;
 import br.itb.projeto.fitBalance.service.ExerciciosService;
 import br.itb.projeto.fitBalance.service.UsuarioService;
@@ -51,6 +54,28 @@ public class ExerciciosController {
 		List<Exercicios> exercicios = exerciciosService.findAll();
 
 		return new ResponseEntity<List<Exercicios>>(exercicios, HttpStatus.OK);
+	}
+	
+	@GetMapping("findById/{id}")
+	public ResponseEntity<Exercicios> findById(@PathVariable long id) {
+
+		Exercicios exercicios = exerciciosService.findById(id);
+		
+		if (exercicios != null) {
+			return new ResponseEntity<Exercicios>(exercicios, HttpStatus.OK);
+		} else {
+			throw new ResourceNotFoundException("***Exercício não encontrado! *** " + "ID: " + id);
+		}
+		
+	}
+	
+
+	@PostMapping("deletar/{id}")
+	public ResponseEntity<String> deleteById(@PathVariable long id) {
+		System.out.println(id);
+		exerciciosService.deleteById(id);
+
+		return new ResponseEntity<String>("Deletado", HttpStatus.OK);
 	}
 	
 	@PostMapping("create")

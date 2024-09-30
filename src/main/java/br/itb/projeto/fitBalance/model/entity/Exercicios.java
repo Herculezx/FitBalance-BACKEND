@@ -23,8 +23,22 @@ public class Exercicios {
 	private long serie;
 	private long repeticoes;
 	private String instrucoes;
+	private String imagem;
+	private String video;
+
 	
-	
+	public String getVideo() {
+		return video;
+	}
+	public void setVideo(String video) {
+		this.video = video;
+	}
+	public String getImagem() {
+		return imagem;
+	}
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
+	}
 	public String getNome() {
 		return nome;
 	}
@@ -43,13 +57,14 @@ public class Exercicios {
 		super();
 	}
 	
-	public Exercicios( String nome, String nivel, long serie, long repeticoes, String instrucoes) {
+	public Exercicios( String nome, String nivel, long serie, long repeticoes, String instrucoes, String imagem) {
 		super();
 		this.nome = nome;
 		this.nivel = nivel;
 		this.serie = serie;
 		this.repeticoes = repeticoes;
 		this.instrucoes = instrucoes;
+		this.imagem = imagem;
 	}
 	public String getNivel() {
 		return nivel;

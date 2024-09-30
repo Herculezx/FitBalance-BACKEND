@@ -42,6 +42,7 @@ public class UsuarioController {
 		Usuario usuario = usuarioService.findById(id);
 
 		if (usuario != null) {
+			
 			return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
 		} else {
 			throw new ResourceNotFoundException("*** Usuário não encontrado! *** " + "ID: " + id);
@@ -98,9 +99,10 @@ public class UsuarioController {
 				.signin(usuario.getEmail(), usuario.getSenha());
 
 		if (_usuario == null) {
+			
 			throw new ResourceNotFoundException("*** Dados Incorretos! *** ");
 		}
-
+		_usuario.setExercicios(null);
 		return ResponseEntity.ok(_usuario);
 	}
 

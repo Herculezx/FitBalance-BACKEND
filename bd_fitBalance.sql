@@ -19,7 +19,7 @@ CREATE TABLE Usuario
    senha         VARCHAR(100)	NOT NULL,
    nivelAcesso   VARCHAR(10)    NULL, -- ADMIN ou USER
    foto			 VARBINARY(MAX) NULL,
-   dataCadastro	 SMALLDATETIME	NOT NULL,
+   dataNascimento	 SMALLDATETIME	NOT NULL,
    statusUsuario VARCHAR(20)    NOT NULL, -- ATIVO ou INATIVO ou TROCAR_SENHA
 
    PRIMARY KEY (id)
@@ -31,13 +31,13 @@ ALTER TABLE Usuario DROP COLUMN dataCadastro
 
 /* Teste */
 
-INSERT Usuario (nome, email, senha, nivelAcesso, foto, dataCadastro, statusUsuario)
+INSERT Usuario (nome, email, senha, nivelAcesso, foto, dataNascimento, statusUsuario)
 VALUES ('Fulano da Silva', 'fulano@email.com.br', 'MTIzNDU2Nzg=', 'ADMIN', NULL, GETDATE(), 'ATIVO')
-INSERT Usuario (nome, email, senha, nivelAcesso, foto, dataCadastro, statusUsuario)
+INSERT Usuario (nome, email, senha, nivelAcesso, foto, dataNascimento, statusUsuario)
 VALUES ('Beltrana de Sá', 'beltrana@email.com.br', 'MTIzNDU2Nzg=', 'USER', NULL, GETDATE(), 'ATIVO')
-INSERT Usuario (nome, email, senha, nivelAcesso, foto, dataCadastro, statusUsuario)
+INSERT Usuario (nome, email, senha, nivelAcesso, foto, dataNascimento, statusUsuario)
 VALUES ('Sicrana de Oliveira', 'sicrana@email.com.br', 'MTIzNDU2Nzg=', 'USER', NULL, GETDATE(), 'INATIVO')
-INSERT Usuario (nome, email, senha, nivelAcesso, foto, dataCadastro, statusUsuario)
+INSERT Usuario (nome, email, senha, nivelAcesso, foto, dataNascimento, statusUsuario)
 VALUES ('Ordnael Zurc', 'ordnael@email.com.br', 'MTIzNDU2Nzg=', 'USER', NULL, GETDATE(), 'TROCAR_SENHA')
 GO
 
@@ -65,6 +65,8 @@ SELECT * FROM Usuario
 SELECT * FROM Mensagem
 select * from Exercicios
 
+select * from exercicioMarcado
+
 CREATE TABLE Exercicios(
 	id int IDENTITY PRIMARY KEY,
 	nivel varchar(25) not null,
@@ -72,20 +74,24 @@ CREATE TABLE Exercicios(
 	repeticoes int not null,
 	nome varchar(100) not null ,
 	instrucoes varchar(500) not null,
-	/* video */
-)
+	video VARchar(MAX) ,
+	imagem VARchar(MAX)
+
+alter table  Exercicios drop column video
+
+alter table Exercicios add video VARCHAR(MAX) 
 
 CREATE TABLE ExercicioFeito(
 id int IDENTITY PRIMARY KEY,
 usuarioId int references Usuario(id),
-exerciciosId int references Exercicios(id),
+exerciciosId int references Exercicios(id) on delete cascade,
 data smallDateTime
 )
 
 CREATE TABLE ExercicioMarcado(
 id int IDENTITY PRIMARY KEY,
 usuarioId int references Usuario(id),
-exerciciosId int references Exercicios(id),
+exerciciosId int references Exercicios(id) on delete cascade,
 )
 
 select * from ExercicioMarcado
