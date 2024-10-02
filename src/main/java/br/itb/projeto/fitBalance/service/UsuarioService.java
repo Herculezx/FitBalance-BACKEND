@@ -1,6 +1,5 @@
 package br.itb.projeto.fitBalance.service;
 
-import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
@@ -145,6 +144,19 @@ public class UsuarioService {
 				
 			usuarioAtualizado.setSenha(senha);
 			usuarioAtualizado.setStatusUsuario("ATIVO");
+			
+			return usuarioRepository.save(usuarioAtualizado);
+		}
+		return null;
+	}
+	
+	@Transactional
+	public Usuario alterarDado(long id , Usuario usuario) {
+		Optional<Usuario> _usuario = usuarioRepository.findById(id);
+		
+		if(_usuario.isPresent()) {
+			Usuario usuarioAtualizado = _usuario.get();
+			usuarioAtualizado.setNome("Nome");
 			
 			return usuarioRepository.save(usuarioAtualizado);
 		}

@@ -32,6 +32,8 @@ ALTER TABLE Usuario DROP COLUMN dataCadastro
 /* Teste */
 
 INSERT Usuario (nome, email, senha, nivelAcesso, foto, dataNascimento, statusUsuario)
+VALUES ('Eduardo Riberker', 'eduardoriberker@email.com.br', 'MTIzNDU2Nzg=', 'ADMIN', NULL, GETDATE(), 'ATIVO')
+INSERT Usuario (nome, email, senha, nivelAcesso, foto, dataNascimento, statusUsuario)
 VALUES ('Fulano da Silva', 'fulano@email.com.br', 'MTIzNDU2Nzg=', 'ADMIN', NULL, GETDATE(), 'ATIVO')
 INSERT Usuario (nome, email, senha, nivelAcesso, foto, dataNascimento, statusUsuario)
 VALUES ('Beltrana de Sá', 'beltrana@email.com.br', 'MTIzNDU2Nzg=', 'USER', NULL, GETDATE(), 'ATIVO')
@@ -64,8 +66,7 @@ GO
 SELECT * FROM Usuario
 SELECT * FROM Mensagem
 select * from Exercicios
-
-select * from exercicioMarcado
+select * from ExercicioMarcado
 
 CREATE TABLE Exercicios(
 	id int IDENTITY PRIMARY KEY,
@@ -76,7 +77,7 @@ CREATE TABLE Exercicios(
 	instrucoes varchar(500) not null,
 	video VARchar(MAX) ,
 	imagem VARchar(MAX)
-
+)
 alter table  Exercicios drop column video
 
 alter table Exercicios add video VARCHAR(MAX) 
@@ -94,7 +95,7 @@ usuarioId int references Usuario(id),
 exerciciosId int references Exercicios(id) on delete cascade,
 )
 
-select * from ExercicioMarcado
+
 
 /*
 CREATE TABLE Cardapio
