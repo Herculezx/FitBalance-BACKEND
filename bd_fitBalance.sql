@@ -68,6 +68,8 @@ SELECT * FROM Mensagem
 select * from Exercicios
 select * from ExercicioMarcado
 
+DELETE FROM Exercicios
+
 CREATE TABLE Exercicios(
 	id int IDENTITY PRIMARY KEY,
 	nivel varchar(25) not null,
