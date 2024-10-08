@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import br.itb.projeto.fitBalance.model.entity.Exercicios;
-import br.itb.projeto.fitBalance.model.entity.Mensagem;
 import br.itb.projeto.fitBalance.model.repository.ExerciciosRepository;
 import jakarta.transaction.Transactional;
 
@@ -26,9 +25,9 @@ public class ExerciciosService {
 	}
 	
 	@Transactional
-	public Exercicios create(Exercicios produto) {
+	public Exercicios create(Exercicios exercicios) {
 		
-		return exerciciosRepository.save(produto);
+		return exerciciosRepository.save(exercicios);
 	}
 	
 	@Transactional

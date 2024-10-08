@@ -68,9 +68,7 @@ public class UsuarioController {
 		
 		System.out.println("_usuario " + usuario.getDataNascimento());
 
-		Usuario _usuario = usuarioService.createNew(usuario);
-		
-		
+		Usuario _usuario = usuarioService.create(usuario);		
 		
 		if (_usuario == null) {
 			System.out.println("_usuario 2" + _usuario);
@@ -80,6 +78,19 @@ public class UsuarioController {
 		return ResponseEntity.ok()
 				.body(new MessageResponse("Usuário cadastrado com sucesso!"));
 	}
+	
+	@PostMapping("salvar")
+	public ResponseEntity<Usuario> salvar(@RequestBody Usuario usuario) {
+
+		Usuario _usuario = usuarioService.salvar(usuario);
+
+		return new ResponseEntity<Usuario>(_usuario, HttpStatus.OK);
+	}
+	
+	
+	
+	
+	
 /*
 	@PostMapping("signin")
 	public ResponseEntity<?> signin(

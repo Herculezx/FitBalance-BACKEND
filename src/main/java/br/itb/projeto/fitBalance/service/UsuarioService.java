@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import br.itb.projeto.fitBalance.model.entity.Exercicios;
 import br.itb.projeto.fitBalance.model.entity.Usuario;
 import br.itb.projeto.fitBalance.model.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
@@ -76,6 +77,13 @@ public class UsuarioService {
 		
 		return usuarioRepository.save(usuario);
 	}
+	
+	@Transactional
+	public Usuario createTeste(Usuario usuario) {
+		
+		return usuarioRepository.save(usuario);
+	}
+	
 	
 	@Transactional
 	public Usuario salvar(Usuario usuario) {
@@ -150,17 +158,6 @@ public class UsuarioService {
 		return null;
 	}
 	
-	@Transactional
-	public Usuario alterarDado(long id , Usuario usuario) {
-		Optional<Usuario> _usuario = usuarioRepository.findById(id);
-		
-		if(_usuario.isPresent()) {
-			Usuario usuarioAtualizado = _usuario.get();
-			usuarioAtualizado.setNome("Nome");
-			
-			return usuarioRepository.save(usuarioAtualizado);
-		}
-		return null;
-	}
+
 	
 }

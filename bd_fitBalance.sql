@@ -18,7 +18,7 @@ CREATE TABLE Usuario
    email         VARCHAR(100)	UNIQUE NOT NULL,
    senha         VARCHAR(100)	NOT NULL,
    nivelAcesso   VARCHAR(10)    NULL, -- ADMIN ou USER
-   foto			 VARBINARY(MAX) NULL,
+   foto			 VARchar(MAX),
    dataNascimento	 SMALLDATETIME	NOT NULL,
    statusUsuario VARCHAR(20)    NOT NULL, -- ATIVO ou INATIVO ou TROCAR_SENHA
 
@@ -26,21 +26,22 @@ CREATE TABLE Usuario
 )
 GO
 
-ALTER TABLE Usuario ADD dataNascimento SMALLDATETIME not null DEFAULT getDate() 
-ALTER TABLE Usuario DROP COLUMN dataCadastro
+ALTER TABLE Usuario ADD foto VARchar(max)
+ALTER TABLE Usuario ADD dataCadastroUsuario smalldatetime not null DEFAULT getDate()
+ALTER TABLE Usuario DROP COLUMN foto
 
 /* Teste */
 
-INSERT Usuario (nome, email, senha, nivelAcesso, foto, dataNascimento, statusUsuario)
-VALUES ('Eduardo Riberker', 'eduardoriberker@email.com.br', 'MTIzNDU2Nzg=', 'ADMIN', NULL, GETDATE(), 'ATIVO')
-INSERT Usuario (nome, email, senha, nivelAcesso, foto, dataNascimento, statusUsuario)
-VALUES ('Fulano da Silva', 'fulano@email.com.br', 'MTIzNDU2Nzg=', 'ADMIN', NULL, GETDATE(), 'ATIVO')
-INSERT Usuario (nome, email, senha, nivelAcesso, foto, dataNascimento, statusUsuario)
-VALUES ('Beltrana de Sá', 'beltrana@email.com.br', 'MTIzNDU2Nzg=', 'USER', NULL, GETDATE(), 'ATIVO')
-INSERT Usuario (nome, email, senha, nivelAcesso, foto, dataNascimento, statusUsuario)
-VALUES ('Sicrana de Oliveira', 'sicrana@email.com.br', 'MTIzNDU2Nzg=', 'USER', NULL, GETDATE(), 'INATIVO')
-INSERT Usuario (nome, email, senha, nivelAcesso, foto, dataNascimento, statusUsuario)
-VALUES ('Ordnael Zurc', 'ordnael@email.com.br', 'MTIzNDU2Nzg=', 'USER', NULL, GETDATE(), 'TROCAR_SENHA')
+INSERT Usuario (nome, email, senha, nivelAcesso, foto, dataNascimento, dataCadastroUsuario , statusUsuario)
+VALUES ('Eduardo Riberker', 'eduardoriberker@email.com.br', 'MTIzNDU2Nzg=', 'ADMIN', NULL, GETDATE(), GETDATE() , 'ATIVO')
+INSERT Usuario (nome, email, senha, nivelAcesso, foto, dataNascimento, dataCadastroUsuario , statusUsuario)
+VALUES ('Fulano da Silva', 'fulano@email.com.br', 'MTIzNDU2Nzg=', 'ADMIN', NULL, GETDATE(), GETDATE(), 'ATIVO')
+INSERT Usuario (nome, email, senha, nivelAcesso, foto, dataNascimento, dataCadastroUsuario , statusUsuario)
+VALUES ('Beltrana de Sá', 'beltrana@email.com.br', 'MTIzNDU2Nzg=', 'USER', NULL, GETDATE(), GETDATE(), 'ATIVO')
+INSERT Usuario (nome, email, senha, nivelAcesso, foto, dataNascimento, dataCadastroUsuario , statusUsuario)
+VALUES ('Sicrana de Oliveira', 'sicrana@email.com.br', 'MTIzNDU2Nzg=', 'USER', NULL, GETDATE(), GETDATE(), 'INATIVO')
+INSERT Usuario (nome, email, senha, nivelAcesso, foto, dataNascimento, dataCadastroUsuario , statusUsuario)
+VALUES ('Ordnael Zurc', 'ordnael@email.com.br', 'MTIzNDU2Nzg=', 'USER', NULL, GETDATE(), GETDATE(), 'TROCAR_SENHA')
 GO
 
 
