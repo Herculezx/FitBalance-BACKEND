@@ -13,9 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.itb.projeto.fitBalance.dto.NovaSenhaDto;
+import br.itb.projeto.fitBalance.model.entity.CodigoRecuperacao;
 import br.itb.projeto.fitBalance.model.entity.Usuario;
+import br.itb.projeto.fitBalance.model.repository.CodigoRecuperacaoRepository;
 import br.itb.projeto.fitBalance.rest.exception.ResourceNotFoundException;
 import br.itb.projeto.fitBalance.rest.response.MessageResponse;
+import br.itb.projeto.fitBalance.service.EmailService;
 import br.itb.projeto.fitBalance.service.UsuarioService;
 
 @RestController
@@ -23,11 +27,18 @@ import br.itb.projeto.fitBalance.service.UsuarioService;
 public class UsuarioController {
 
 	private UsuarioService usuarioService;
+	private EmailService emailService;
+    private CodigoRecuperacaoRepository codigoRecuperacaoRepository;
 
-	public UsuarioController(UsuarioService usuarioService) {
+    
+	public UsuarioController(UsuarioService usuarioService, EmailService emailService,
+			CodigoRecuperacaoRepository codigoRecuperacaoRepository) {
 		super();
 		this.usuarioService = usuarioService;
+		this.emailService = emailService;
+		this.codigoRecuperacaoRepository = codigoRecuperacaoRepository;
 	}
+
 
 	@GetMapping("findAll")
 	public ResponseEntity<List<Usuario>> findAll() {
@@ -86,6 +97,25 @@ public class UsuarioController {
 
 		return new ResponseEntity<Usuario>(_usuario, HttpStatus.OK);
 	}
+	
+	@PostMapping("codigo/{email}/")
+    public CodigoRecuperacao obterCodigo(@PathVariable String email) {
+        System.out.println(email);
+        System.out.println(usuarioService.findByEmail(email));
+        var usuario = usuarioService.findByEmail(email);
+        CodigoRecuperacao codigo = codigoRecuperacaoRepository.save(new CodigoRecuperacao(usuario));
+        System.out.println(codigo.getCodigo());
+        emailService.enviarEmail(email, "código para mudar senha", "seu código é: " + codigo.getCodigo());
+ 
+        return codigo;
+ 
+    }
+ 
+    @PostMapping("codigo/")
+    public Usuario mudarSenha(@RequestBody NovaSenhaDto novaSenha) {
+ 
+        return usuarioService.create(novaSenha.getConta());
+    }
 	
 	
 	

@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -23,7 +24,9 @@ public class Exercicios {
 	private long serie;
 	private long repeticoes;
 	private String instrucoes;
+	@Lob
 	private String imagem;
+	@Lob
 	private String video;
 
 	
@@ -55,6 +58,17 @@ public class Exercicios {
 	
 	public Exercicios() {
 		super();
+	}
+	
+	public Exercicios( String nome, String nivel, long serie, long repeticoes, String instrucoes, String imagem, String video) {
+		super();
+		this.nome = nome;
+		this.nivel = nivel;
+		this.serie = serie;
+		this.repeticoes = repeticoes;
+		this.instrucoes = instrucoes;
+		this.imagem = imagem;
+		this.video = video;
 	}
 	
 	public Exercicios( String nome, String nivel, long serie, long repeticoes, String instrucoes, String imagem) {

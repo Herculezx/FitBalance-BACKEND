@@ -23,8 +23,6 @@ public class NovaSenhaDto {
     }
 
     
-
-    
     public String getSenha() {
         return senha;
     }

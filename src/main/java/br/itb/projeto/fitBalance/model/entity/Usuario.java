@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinColumns;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
@@ -27,6 +28,7 @@ public class Usuario {
 	private String email;
 	private String senha;
 	private String nivelAcesso = "USER";
+	@Lob
 	private String foto;
 	
 	@ManyToMany
@@ -44,6 +46,20 @@ public class Usuario {
 	// Source -> Generate Getters and Setters...
 	public long getId() {
 		return id;
+	}
+	
+	public Usuario() {
+		
+	}
+	public Usuario(String nome, String email, String senha, String nivelAcesso, 
+			LocalDateTime dataNascimento, String statusUsuario) {
+		super();
+		this.nome = nome;
+		this.email = email;
+		this.senha = senha;
+		this.nivelAcesso = nivelAcesso;
+		this.dataNascimento = dataNascimento;
+		this.statusUsuario = statusUsuario;
 	}
 	public void setId(long id) {
 		this.id = id;
