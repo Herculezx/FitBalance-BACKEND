@@ -91,7 +91,7 @@ public class UsuarioService {
 		return usuarioRepository.save(usuario);
 	}
 	
-	
+
 	@Transactional
 	public Usuario signin(String email, String senha) {
 	 Usuario usuario = usuarioRepository.obterPorEmail(email);
@@ -141,14 +141,14 @@ public class UsuarioService {
 	}
 	
 	@Transactional
-	public Usuario alterarSenha(long id, Usuario usuario) {
+	public Usuario alterarSenha(long id, String novaSenha) {
 		Optional<Usuario> _usuario = 
 				usuarioRepository.findById(id);
 		
 		if (_usuario.isPresent()) {
 			Usuario usuarioAtualizado = _usuario.get();
 			String senha = Base64.getEncoder()
-					.encodeToString(usuario.getSenha().getBytes());
+					.encodeToString(novaSenha.getBytes());
 				
 			usuarioAtualizado.setSenha(senha);
 			usuarioAtualizado.setStatusUsuario("ATIVO");

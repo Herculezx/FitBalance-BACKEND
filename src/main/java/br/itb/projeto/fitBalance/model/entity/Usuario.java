@@ -5,7 +5,10 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -14,6 +17,7 @@ import jakarta.persistence.JoinColumns;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -28,8 +32,23 @@ public class Usuario {
 	private String email;
 	private String senha;
 	private String nivelAcesso = "USER";
+	
+	@Column(name = "foto_id", insertable = false, updatable = false, nullable = true)
+	private Long foto_id;
+	
 	@Lob
-	private String foto;
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, optional = true)
+	@JoinColumn
+	private Arquivo foto;
+	
+	
+	public long getFoto_id() {
+		return foto_id == null ? 0 : foto_id;
+	}
+	public void setFoto_id(long foto_id) {
+		this.foto_id = foto_id;
+	}
+	
 	
 	@ManyToMany
 	@JoinTable(name = "ExercicioMarcado" , joinColumns = @JoinColumn(name = "usuarioId") , inverseJoinColumns = @JoinColumn(name = "exerciciosId"))
@@ -88,10 +107,11 @@ public class Usuario {
 	public void setNivelAcesso(String nivelAcesso) {
 		this.nivelAcesso = nivelAcesso;
 	}
-	public String getFoto() {
+	
+	public Arquivo getFoto() {
 		return foto;
 	}
-	public void setFoto(String foto) {
+	public void setFoto(Arquivo foto) {
 		this.foto = foto;
 	}
 	public LocalDateTime getDataNascimento() {

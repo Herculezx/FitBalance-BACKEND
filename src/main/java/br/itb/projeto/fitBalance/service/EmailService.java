@@ -18,17 +18,25 @@ public class EmailService {
         var sender = new JavaMailSenderImpl();
         sender.setHost("smtp.gmail.com");
         sender.setPort(587);
-        sender.setUsername(Environment.getProperties().getProperty("spring.mail.username"));
-        sender.setPassword(Environment.getProperties().getProperty("spring.mail.password"));
+        sender.setUsername("fitbalancedev@gmail.com");
+        sender.setPassword("zkuadkwsuvsubwdc");
+        
+        Properties props = sender.getJavaMailProperties();
+        props.put("mail.transport.protocol", "smtp");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.debug", "true");
+        
+
        
-        Properties mailProperties = new Properties();  
+        /*Properties mailProperties = new Properties();  
         mailProperties.put("mail.smtp.host", "smtp.gmail.com");  
         mailProperties.put("mail.smtp.auth", "true");  
         mailProperties.put("mail.smtp.port", "465");  
         mailProperties.put("mail.smtp.starttls.enable", "true");  
         mailProperties.put("mail.smtp.socketFactory.port", "465");  
         mailProperties.put("mail.smtp.socketFactory.fallback", "false");  
-        mailProperties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        mailProperties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");*/
         
         var mensagem = new SimpleMailMessage();
         mensagem.setFrom(Environment.getProperties().getProperty("spring.mail.username"));

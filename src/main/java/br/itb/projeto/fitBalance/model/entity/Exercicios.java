@@ -23,6 +23,7 @@ public class Exercicios {
 	private String nivel;
 	private long serie;
 	private long repeticoes;
+	@Lob
 	private String instrucoes;
 	@Lob
 	private String imagem;

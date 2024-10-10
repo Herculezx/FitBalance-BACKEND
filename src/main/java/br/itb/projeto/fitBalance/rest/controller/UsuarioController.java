@@ -114,7 +114,7 @@ public class UsuarioController {
     @PostMapping("codigo/")
     public Usuario mudarSenha(@RequestBody NovaSenhaDto novaSenha) {
  
-        return usuarioService.create(novaSenha.getConta());
+        return usuarioService.alterarSenha(novaSenha.getConta().getId(), novaSenha.getSenha());
     }
 	
 	
@@ -167,7 +167,7 @@ public class UsuarioController {
 	public ResponseEntity<?> alterarSenha(
 			@PathVariable long id, @RequestBody Usuario usuario) {
 
-		Usuario _usuario = usuarioService.alterarSenha(id, usuario);
+		Usuario _usuario = usuarioService.alterarSenha(id,  usuario.getSenha());
 
 		//return new ResponseEntity<Usuario>(_usuario, HttpStatus.OK);
 		return ResponseEntity.ok()
