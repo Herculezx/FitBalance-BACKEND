@@ -9,8 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import br.itb.projeto.fitBalance.model.entity.Exercicios;
+import br.itb.projeto.fitBalance.model.entity.Mensagem;
 import br.itb.projeto.fitBalance.model.entity.Usuario;
 import br.itb.projeto.fitBalance.service.ExerciciosService;
+import br.itb.projeto.fitBalance.service.MensagemService;
 import br.itb.projeto.fitBalance.service.UsuarioService;
 
 @SpringBootApplication
@@ -20,6 +22,8 @@ public class Startup {
 	ExerciciosService exerciciosService;
 	@Autowired
 	UsuarioService usuarioService;
+	@Autowired
+	MensagemService mensagemService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Startup.class, args);
@@ -28,10 +32,18 @@ public class Startup {
 	@Bean
 	InitializingBean sendDatabase() {
 		return () -> {
+			
+			// standard Messages
+			
+			// standard Users
 			if (usuarioService.findAll().size() == 0) {
-				usuarioService.create(new Usuario("alemao", "alemao@email.com.br", "admin", "ADMIN",
+				usuarioService.create(new Usuario("Admin Riberker", "admin@email.com", "admin", "ADMIN",
 						LocalDateTime.of(2006, 10, 2, 1, 1), "ATIVO"));
+				usuarioService.create(new Usuario("Usuario" , "usuario@email.com" , "user" , "USER" , 
+						LocalDateTime.of(2006, 10, 2, 1, 1) , "ATIVO"));
 			}
+			
+			// Exercise Auto Setup
 			if (exerciciosService.findAll().size() == 0) {
 				// Beginner
 				exerciciosService.create(new Exercicios("Alongamento estático", "Iniciante", 1, 20,

@@ -129,10 +129,6 @@ public class UsuarioService {
 		
 		if (_usuario.isPresent()) {
 			Usuario usuarioAtualizado = _usuario.get();
-			String senha = Base64.getEncoder()
-					.encodeToString("12345678".getBytes());
-				
-			usuarioAtualizado.setSenha(senha);
 			usuarioAtualizado.setStatusUsuario("ATIVO");
 			
 			return usuarioRepository.save(usuarioAtualizado);
