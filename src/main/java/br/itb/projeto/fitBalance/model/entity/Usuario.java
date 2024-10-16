@@ -1,9 +1,8 @@
 package br.itb.projeto.fitBalance.model.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -13,7 +12,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinColumns;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
@@ -60,7 +58,7 @@ public class Usuario {
 	public void setExercicios(List<Exercicios> exercicios) {
 		this.exercicios = exercicios;
 	}
-	private LocalDateTime dataNascimento;
+	private LocalDate dataNascimento;
 	private String statusUsuario;
 	// Source -> Generate Getters and Setters...
 	public long getId() {
@@ -71,7 +69,7 @@ public class Usuario {
 		
 	}
 	public Usuario(String nome, String email, String senha, String nivelAcesso, 
-			LocalDateTime dataNascimento, String statusUsuario) {
+			LocalDate dataNascimento, String statusUsuario) {
 		super();
 		this.nome = nome;
 		this.email = email;
@@ -114,10 +112,10 @@ public class Usuario {
 	public void setFoto(Arquivo foto) {
 		this.foto = foto;
 	}
-	public LocalDateTime getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
-	public void setDataNascimento(LocalDateTime dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 	public String getStatusUsuario() {

@@ -1,5 +1,6 @@
 package br.itb.projeto.fitBalance;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.InitializingBean;
@@ -9,7 +10,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import br.itb.projeto.fitBalance.model.entity.Exercicios;
-import br.itb.projeto.fitBalance.model.entity.Mensagem;
 import br.itb.projeto.fitBalance.model.entity.Usuario;
 import br.itb.projeto.fitBalance.service.ExerciciosService;
 import br.itb.projeto.fitBalance.service.MensagemService;
@@ -38,9 +38,9 @@ public class Startup {
 			// standard Users
 			if (usuarioService.findAll().size() == 0) {
 				usuarioService.create(new Usuario("Admin Riberker", "admin@email.com", "admin", "ADMIN",
-						LocalDateTime.of(2006, 10, 2, 1, 1), "ATIVO"));
+						LocalDate.of(2007, 03, 31) , "ATIVO"));
 				usuarioService.create(new Usuario("Usuario" , "usuario@email.com" , "user" , "USER" , 
-						LocalDateTime.of(2006, 10, 2, 1, 1) , "ATIVO"));
+						LocalDate.of(2006, 10, 10) , "ATIVO"));
 			}
 			
 			// Exercise Auto Setup

@@ -79,6 +79,21 @@ public class MensagemService {
 	}
 	
 	@Transactional
+	public Mensagem ativar(long id) {
+		Optional<Mensagem> _mensagem = 
+				mensagemRepository.findById(id);
+		
+		if (_mensagem.isPresent()) {
+			Mensagem mensagemAtualizada = _mensagem.get();
+			mensagemAtualizada.setStatusMensagem("ATIVO");
+			
+			return mensagemRepository.save(mensagemAtualizada);
+		}
+		return null;
+	}
+	
+	
+	@Transactional
 	public Mensagem marcarComoLida(long id) {
 		Optional<Mensagem> _mensagem = 
 				mensagemRepository.findById(id);

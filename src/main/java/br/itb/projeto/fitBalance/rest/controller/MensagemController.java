@@ -17,7 +17,6 @@ import br.itb.projeto.fitBalance.rest.exception.ResourceNotFoundException;
 import br.itb.projeto.fitBalance.rest.response.MessageResponse;
 import br.itb.projeto.fitBalance.service.MensagemService;
 import br.itb.projeto.fitBalance.service.UsuarioService;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
@@ -67,6 +66,14 @@ public class MensagemController {
 		}
 		return ResponseEntity.ok()
 				.body(new MessageResponse("Mensagem enviada com sucesso!"));
+	}
+	
+	@PutMapping("ativar/{id}")
+	public ResponseEntity<Mensagem> ativar(@PathVariable long id) {
+
+		Mensagem _mensagem = mensagemService.ativar(id);
+
+		return new ResponseEntity<Mensagem>(_mensagem, HttpStatus.OK);
 	}
 	
 	@PutMapping("inativar/{id}")

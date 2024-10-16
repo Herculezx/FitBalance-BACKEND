@@ -65,9 +65,12 @@ VALUES (GETDATE(), 'Maria Onete', 'maria@email.com', null, 'Segunda mensagem de 
 GO
 
 SELECT * FROM Usuario
+DELETE FROM Usuario where id >= 5
 SELECT * FROM Mensagem
 select * from Exercicios
+select * from ExerciciosFeito
 select * from ExercicioMarcado
+SELECT * FROM Arquivo
 
 DELETE FROM Exercicios
 

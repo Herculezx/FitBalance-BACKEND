@@ -94,6 +94,10 @@ public class UsuarioController {
 	public ResponseEntity<Usuario> salvar(@RequestBody Usuario usuario) {
 
 		Usuario _usuario = usuarioService.salvar(usuario);
+		 if (usuario.getFoto() != null) {
+			usuario.setFoto_id(usuario.getFoto().getId());
+		};
+		
 
 		return new ResponseEntity<Usuario>(_usuario, HttpStatus.OK);
 	}
@@ -117,22 +121,7 @@ public class UsuarioController {
         return usuarioService.alterarSenha(novaSenha.getConta().getId(), novaSenha.getSenha());
     }
 	
-	
-	
-	
-	
-/*
-	@PostMapping("signin")
-	public ResponseEntity<?> signin(
-			@RequestParam String email, @RequestParam String senha) {
 
-		Usuario usuario = usuarioService.signin(email, senha);
-		if (usuario != null) {
-			return ResponseEntity.ok().body(usuario);
-		}
-		return ResponseEntity.badRequest().body("Dados incorretos!");
-	}
-	*/
 	@PostMapping("/signin")
 	public ResponseEntity<?> signin(@RequestBody Usuario usuario) {
 
