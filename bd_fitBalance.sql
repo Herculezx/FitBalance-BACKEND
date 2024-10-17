@@ -65,14 +65,16 @@ VALUES (GETDATE(), 'Maria Onete', 'maria@email.com', null, 'Segunda mensagem de 
 GO
 
 SELECT * FROM Usuario
-DELETE FROM Usuario where id >= 5
 SELECT * FROM Mensagem
 select * from Exercicios
 select * from ExerciciosFeito
 select * from ExercicioMarcado
 SELECT * FROM Arquivo
 
-DELETE FROM Exercicios
+ /*Delete from something */
+
+ DELETE FROM Usuario where id >= 5
+ DELETE FROM Exercicios
 
 CREATE TABLE Exercicios(
 	id int IDENTITY PRIMARY KEY,
