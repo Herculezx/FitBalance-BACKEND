@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.itb.projeto.fitBalance.model.entity.Exercicios;
 import br.itb.projeto.fitBalance.model.entity.Usuario;
+import br.itb.projeto.fitBalance.model.repository.ArquivoRepository;
 import br.itb.projeto.fitBalance.model.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
 
@@ -15,10 +16,14 @@ import jakarta.transaction.Transactional;
 public class UsuarioService {
 
 	private UsuarioRepository usuarioRepository;
+	private ArquivoRepository arquivoRepository;
+	
+	
 
-	public UsuarioService(UsuarioRepository usuarioRepository) {
+	public UsuarioService(UsuarioRepository usuarioRepository, ArquivoRepository arquivoRepository) {
 		super();
 		this.usuarioRepository = usuarioRepository;
+		this.arquivoRepository = arquivoRepository;
 	}
 
 	public List<Usuario> findAll() {
@@ -31,7 +36,9 @@ public class UsuarioService {
 		Optional<Usuario> usuario = usuarioRepository.findById(id);
 
 		if (usuario.isPresent()) {
-			return usuario.get();
+			Usuario resultado = usuario.get();
+			resultado.setFoto(null);
+			return resultado;
 		}
 
 		return null;

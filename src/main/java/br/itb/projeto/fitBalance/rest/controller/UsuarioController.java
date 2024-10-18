@@ -94,8 +94,10 @@ public class UsuarioController {
 	public ResponseEntity<Usuario> salvar(@RequestBody Usuario usuario) {
 
 		Usuario _usuario = usuarioService.salvar(usuario);
+		System.out.print(usuario.getFotoId());
 		 if (usuario.getFoto() != null) {
-			usuario.setFoto_id(usuario.getFoto().getId());
+			_usuario.setFotoId(usuario.getFoto().getId());
+			_usuario.setFoto(null);
 		};
 		
 

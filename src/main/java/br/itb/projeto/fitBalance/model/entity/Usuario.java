@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,27 +29,27 @@ public class Usuario {
 		(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String nome;
+	@Column(unique = true)
 	private String email;
 	private String senha;
 	private String nivelAcesso = "USER";
 	
 	@Column(name = "foto_id", insertable = false, updatable = false, nullable = true)
-	private Long foto_id;
+	private Long fotoId;
 	
 	@Lob
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, optional = true)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
 	@JoinColumn
+	@JsonBackReference
 	private Arquivo foto;
 	
 	
-	public long getFoto_id() {
-		return foto_id == null ? 0 : foto_id;
+	public Long getFotoId() {
+		return fotoId;
 	}
-	public void setFoto_id(long foto_id) {
-		this.foto_id = foto_id;
+	public void setFotoId(Long fotoId) {
+		this.fotoId = fotoId;
 	}
-	
-	
 	@ManyToMany
 	@JoinTable(name = "ExercicioMarcado" , joinColumns = @JoinColumn(name = "usuarioId") , inverseJoinColumns = @JoinColumn(name = "exerciciosId"))
 	private List<Exercicios> exercicios;

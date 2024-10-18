@@ -17,6 +17,16 @@ public class Arquivo {
 	
 	private String extensao;
 	
+	
+	
+	public Arquivo() {
+		super();
+	}
+	public Arquivo(byte[] conteudo, String extensao) {
+		super();
+		this.conteudo = conteudo;
+		this.extensao = extensao;
+	}
 	public String getExtensao() {
 		return extensao;
 	}
