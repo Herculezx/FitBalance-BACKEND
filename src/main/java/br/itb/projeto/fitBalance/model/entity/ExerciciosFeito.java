@@ -1,5 +1,7 @@
 package br.itb.projeto.fitBalance.model.entity;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,6 +25,16 @@ public class ExerciciosFeito {
 	@ManyToOne
 	@JoinColumn
 	private Exercicios exercicios;
+	
+	private LocalDate data;
+
+	public LocalDate getData() {
+		return data;
+	}
+
+	public void setData(LocalDate data) {
+		this.data = data;
+	}
 
 	public long getId() {
 		return id;

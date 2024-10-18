@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.support.RequestPartServletServerHttpRequest;
 
 import br.itb.projeto.fitBalance.model.entity.Exercicios;
+import br.itb.projeto.fitBalance.model.entity.ExerciciosFeito;
 import br.itb.projeto.fitBalance.model.entity.Mensagem;
 import br.itb.projeto.fitBalance.model.entity.Usuario;
 import br.itb.projeto.fitBalance.rest.exception.ResourceNotFoundException;
@@ -89,6 +91,25 @@ public class ExerciciosController {
 		}
 		return ResponseEntity.ok()
 				.body(new MessageResponse("Exercicios Cadastrado com sucesso!"));
+	}
+	
+	@PostMapping("fazer/{id}")
+	public String fazer(@PathVariable long id, @RequestHeader("logado") String logado) {
+		Exercicios exercicios = exerciciosService.findById(id);
+		Usuario usuario = usuarioService.findByEmail(logado);
+		
+		ExerciciosFeito feito = new ExerciciosFeito();
+		feito.setExercicios(exercicios);
+		feito.setUsuario(usuario);
+		
+		feito.setExercicios(exercicios);
+		return "sucess";
+	}
+	
+@PostMapping("desfazer/{id}")
+public String desfazer(@PathVariable long id) {
+		return "sucess";
+		
 	}
 
 }
