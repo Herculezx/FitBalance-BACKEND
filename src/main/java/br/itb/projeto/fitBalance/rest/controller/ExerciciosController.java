@@ -1,5 +1,6 @@
 package br.itb.projeto.fitBalance.rest.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +20,13 @@ import br.itb.projeto.fitBalance.model.entity.Exercicios;
 import br.itb.projeto.fitBalance.model.entity.ExerciciosFeito;
 import br.itb.projeto.fitBalance.model.entity.Mensagem;
 import br.itb.projeto.fitBalance.model.entity.Usuario;
+import br.itb.projeto.fitBalance.model.repository.ExerciciosFeitoRepository;
 import br.itb.projeto.fitBalance.rest.exception.ResourceNotFoundException;
 import br.itb.projeto.fitBalance.rest.response.MessageResponse;
 import br.itb.projeto.fitBalance.service.ExerciciosService;
 import br.itb.projeto.fitBalance.service.UsuarioService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 
 @RestController
 @RequestMapping("/exercicios/")
@@ -33,12 +36,14 @@ public class ExerciciosController {
 
 	private UsuarioService usuarioService;
 	
+	ExerciciosFeitoRepository exerciciosFeitoRepository;
 	
 	
-	public ExerciciosController(ExerciciosService exerciciosService, UsuarioService usuarioService) {
+	public ExerciciosController(ExerciciosService exerciciosService, UsuarioService usuarioService, ExerciciosFeitoRepository exerciciosFeitoRepository) {
 		super();
 		this.exerciciosService = exerciciosService;
 		this.usuarioService = usuarioService;
+		this.exerciciosFeitoRepository = exerciciosFeitoRepository;
 	}
 	
 	@PostMapping("marcar")
@@ -103,12 +108,23 @@ public class ExerciciosController {
 		feito.setUsuario(usuario);
 		
 		feito.setExercicios(exercicios);
+		feito.setData(LocalDate.now());
+		exerciciosFeitoRepository.save(feito);
+		exercicios.getFeitos().add(feito);
+		exerciciosService.alterar(exercicios);
 		return "sucess";
 	}
 	
 @PostMapping("desfazer/{id}")
-public String desfazer(@PathVariable long id) {
+@Transactional
+public String desfazer(@PathVariable long id, @RequestHeader("logado") String logado) {
+	Exercicios exercicios = exerciciosService.findById(id);
+	Usuario usuario = usuarioService.findByEmail(logado);
+	exerciciosFeitoRepository.deleteByDataAndExerciciosAndUsuario(LocalDate.now(), exercicios, usuario);
+	exercicios.setFeitos(exerciciosFeitoRepository.findAllByExerciciosAndUsuario(exercicios, usuario));
+	exerciciosService.alterar(exercicios);
 		return "sucess";
+		
 		
 	}
 

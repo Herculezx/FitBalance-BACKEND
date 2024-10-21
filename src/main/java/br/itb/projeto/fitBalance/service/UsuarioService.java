@@ -130,6 +130,20 @@ public class UsuarioService {
 	}
 	
 	@Transactional
+	public Usuario inativoPeloUsuario(long id) {
+		Optional<Usuario> _usuario = 
+				usuarioRepository.findById(id);
+		
+		if (_usuario.isPresent()) {
+			Usuario usuarioAtualizada = _usuario.get();
+			usuarioAtualizada.setStatusUsuario("inativoPeloUsuario");
+			
+			return usuarioRepository.save(usuarioAtualizada);
+		}
+		return null;
+	}
+	
+	@Transactional
 	public Usuario reativar(long id) {
 		Optional<Usuario> _usuario = 
 				usuarioRepository.findById(id);

@@ -2,6 +2,8 @@ package br.itb.projeto.fitBalance.model.entity;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,10 +22,12 @@ public class ExerciciosFeito {
 	
 	@ManyToOne
 	@JoinColumn
+	@JsonBackReference("Usuario")
 	private Usuario usuario;
 	
 	@ManyToOne
 	@JoinColumn
+	@JsonBackReference
 	private Exercicios exercicios;
 	
 	private LocalDate data;

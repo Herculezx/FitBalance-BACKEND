@@ -40,7 +40,7 @@ public class Usuario {
 	@Lob
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
 	@JoinColumn
-	@JsonBackReference
+	@JsonBackReference("Foto")
 	private Arquivo foto;
 	
 	

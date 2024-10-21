@@ -48,10 +48,6 @@ public class Startup {
 				/* STARTER */ 
 				
 				//Alongamento Estático  nao tem video 
-				exerciciosService.create(new Exercicios("Alongamento estático", "Iniciante", 1, 20,
-						"No alongamento estático, você deve esticar o músculo até atingir uma determinada posição, mantendo-o assim por aproximadamente 30 segundos. A ideia é que você se alongue até chegar a um limite considerado confortável.",
-						new String(((InputStream) getClass().getResourceAsStream("/images/alongamento_estatico.txt")).readAllBytes())
-						, ""));
 
 				//Agachamentos
 				exerciciosService.create(new Exercicios("Agachamentos", "Iniciante", 1, 8,
@@ -119,11 +115,6 @@ public class Startup {
 				
 				/* INTERMEDIARY */
 				
-				
-				exerciciosService.create(new Exercicios("Alongamento estático", "Intermediário", 2, 30,
-						"No alongamento estático, você deve esticar o músculo até atingir uma determinada posição, mantendo-o assim por aproximadamente 30 segundos. A ideia é que você se alongue até chegar a um limite considerado confortável.",
-						new String(((InputStream) getClass().getResourceAsStream("/images/alongamento_estatico.txt")).readAllBytes()), ""));
-
 				//Agachamentos
 				exerciciosService.create(new Exercicios("Agachamentos", "Intermediário", 2, 15,
 						"Posicione-se em pé, mantendo os pés afastados na largura dos ombros. Dobre os joelhos e desça o quadril, simulando o ato de se sentar em uma cadeira. Mantenha as costas retas e verifique se os joelhos estão alinhados com os tornozelos. Volte à posição inicial.",
@@ -209,9 +200,9 @@ public class Startup {
 				
 				/* ADVANCED */
 				
-				exerciciosService.create(new Exercicios("Alongamento estático", "Avançado", 4, 30,
-						"No alongamento estático, você deve esticar o músculo até atingir uma determinada posição, mantendo-o assim por aproximadamente 30 segundos. A ideia é que você se alongue até chegar a um limite considerado confortável.",
-						new String(((InputStream) getClass().getResourceAsStream("/images/alongamento_estatico.txt")).readAllBytes()), ""));
+//				exerciciosService.create(new Exercicios("Alongamento estático", "Avançado", 4, 30,
+//						"No alongamento estático, você deve esticar o músculo até atingir uma determinada posição, mantendo-o assim por aproximadamente 30 segundos. A ideia é que você se alongue até chegar a um limite considerado confortável.",
+//						new String(((InputStream) getClass().getResourceAsStream("/images/alongamento_estatico.txt")).readAllBytes()), ""));
 
 				//Agachamentos
 				exerciciosService.create(new Exercicios("Agachamentos", "Avançado", 4, 20,

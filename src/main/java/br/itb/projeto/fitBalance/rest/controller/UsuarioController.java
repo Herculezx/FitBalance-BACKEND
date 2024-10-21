@@ -145,6 +145,14 @@ public class UsuarioController {
 
 		return new ResponseEntity<Usuario>(_usuario, HttpStatus.OK);
 	}
+	
+	@PutMapping("inativoPeloUsuario/{id}")
+	public ResponseEntity<Usuario> inativarPeloUsuario(@PathVariable long id) {
+
+		Usuario _usuario = usuarioService.inativoPeloUsuario(id);
+
+		return new ResponseEntity<Usuario>(_usuario, HttpStatus.OK);
+	}
 
 	@PutMapping("reativar/{id}")
 	public ResponseEntity<Usuario> reativar(@PathVariable long id) {

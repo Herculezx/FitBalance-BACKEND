@@ -2,8 +2,10 @@ package br.itb.projeto.fitBalance.model.entity;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Base64;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -15,6 +17,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -48,6 +51,21 @@ public class Exercicios {
 	@JoinColumn
 	@JsonBackReference
 	private Arquivo video;
+	
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "exercicios")
+	@JsonManagedReference
+	private List<ExerciciosFeito> feitos; 
+	
+	
+
+	public List<ExerciciosFeito> getFeitos() {
+		return feitos;
+	}
+
+	public void setFeitos(List<ExerciciosFeito> feitos) {
+		this.feitos = feitos;
+	}
 
 	public Long getImagemId() {
 		return imagemId;
@@ -119,12 +137,17 @@ public class Exercicios {
 			this.imagem = new Arquivo(bytes, extensao);
 			
 			String[] partesVideo = video.split(";base64,");
-			String extensaoVideo = partesVideo[0].replaceAll("data:", "");
+			
+			if (!video.equals("")) {
+				String extensaoVideo = partesVideo[0].replaceAll("data:", "");
 
 
-			byte[] bytesVideo = Base64.getDecoder().decode(partesVideo[1].getBytes());
+				byte[] bytesVideo = Base64.getDecoder().decode(partesVideo[1].getBytes());
 
-			this.video = new Arquivo(bytesVideo, extensaoVideo);
+				this.video = new Arquivo(bytesVideo, extensaoVideo);
+			}
+			
+		
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
