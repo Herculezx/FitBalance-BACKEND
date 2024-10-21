@@ -66,15 +66,18 @@ GO
 
 SELECT * FROM Usuario
 SELECT * FROM Mensagem
-select * from Exercicios
 select * from ExerciciosFeito
 select * from ExercicioMarcado
+select * from Exercicios
 SELECT * FROM Arquivo
+
+DELETE FROM Arquivo
 
  /*Delete from something */
 
  DELETE FROM Usuario where id >= 5
  DELETE FROM Exercicios
+ DELETE FROM ExercicioMarcado
 
 CREATE TABLE Exercicios(
 	id int IDENTITY PRIMARY KEY,
