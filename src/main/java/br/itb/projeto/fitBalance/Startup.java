@@ -21,7 +21,7 @@ import br.itb.projeto.fitBalance.service.MensagemService;
 import br.itb.projeto.fitBalance.service.UsuarioService;
 
 @SpringBootApplication
-@CrossOrigin(origins = "*")
+// @CrossOrigin(origins = "*")
 public class Startup {
 	@Autowired
 	ExerciciosService exerciciosService;
@@ -38,9 +38,9 @@ public class Startup {
 	InitializingBean sendDatabase() {
 		return () -> {
 			if (usuarioService.findAll().size() == 0) {
-				usuarioService.create(new Usuario("Admin Riberker", "admin@email.com", "admin", "ADMIN",
+				usuarioService.create(new Usuario("Admin Riberker", "admin@email.com", "Admin111", "ADMIN",
 						LocalDate.of(2006, 10, 2), "ATIVO"));
-				usuarioService.create(new Usuario("Usuario", "usuario@email.com", "user", "USER",
+				usuarioService.create(new Usuario("Usuario", "usuario@email.com", "Usuario1", "USER",
 						LocalDate.of(2006, 10, 2), "ATIVO"));
 			}
 			if (exerciciosService.findAll().size() == 0) {
