@@ -76,6 +76,7 @@ DELETE FROM Arquivo
  /*Delete from something */
 
  DELETE FROM Usuario where id >= 5
+ DELETE FROM CodigoRecuperacao
  DELETE FROM Exercicios
  DELETE FROM ExercicioMarcado
 
