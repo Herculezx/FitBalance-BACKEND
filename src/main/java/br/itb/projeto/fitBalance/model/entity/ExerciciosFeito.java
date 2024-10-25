@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,12 +21,12 @@ public class ExerciciosFeito {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@ManyToOne
+	@ManyToOne()
 	@JoinColumn
 	@JsonBackReference("Usuario")
 	private Usuario usuario;
 	
-	@ManyToOne
+	@ManyToOne()
 	@JoinColumn
 	@JsonBackReference
 	private Exercicios exercicios;

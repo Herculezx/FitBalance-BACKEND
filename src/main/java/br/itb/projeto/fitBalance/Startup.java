@@ -42,6 +42,11 @@ public class Startup {
 						LocalDate.of(2006, 10, 2), "ATIVO"));
 				usuarioService.create(new Usuario("Usuario", "usuario@email.com", "Usuario1", "USER",
 						LocalDate.of(2006, 10, 2), "ATIVO"));
+						usuarioService.create(new Usuario("UserMensagem", "userMensagem@email.com", "Usuario1", "USER",
+						LocalDate.of(2006, 10, 2), "ATIVO"));
+			}
+			if (mensagemService.findAll(null).size() == 0) {
+				mensagemService.create(new Mensagem("UserMensagem" ,"userMensagem@email.com" ,  "11959473093" , "TESTE MENSAGEM"));
 			}
 			if (exerciciosService.findAll().size() == 0) {
 				

@@ -3,6 +3,7 @@ package br.itb.projeto.fitBalance.model.entity;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -19,6 +20,7 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+
 
 @Entity
 @Table(name = "Usuario")
@@ -50,9 +52,9 @@ public class Usuario {
 	public void setFotoId(Long fotoId) {
 		this.fotoId = fotoId;
 	}
-	@ManyToMany
-	@JoinTable(name = "ExercicioMarcado" , joinColumns = @JoinColumn(name = "usuarioId") , inverseJoinColumns = @JoinColumn(name = "exerciciosId"))
-	private List<Exercicios> exercicios;
+	@ManyToMany(cascade = CascadeType.REMOVE )
+	@JoinTable(name = "ExercicioMarcado" ,  joinColumns = @JoinColumn(name = "usuarioId") , inverseJoinColumns = @JoinColumn(name = "exerciciosId"))
+	private List<Exercicios> exercicios = new ArrayList<>();
 	
 	public List<Exercicios> getExercicios() {
 		return exercicios;

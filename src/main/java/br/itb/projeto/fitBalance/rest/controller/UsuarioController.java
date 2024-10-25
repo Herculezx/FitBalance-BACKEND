@@ -138,7 +138,7 @@ public class UsuarioController {
 		return ResponseEntity.ok(_usuario);
 	}
 
-	@PutMapping("inativar/{id}")
+	@PostMapping("inativar/{id}")
 	public ResponseEntity<Usuario> inativar(@PathVariable long id) {
 
 		Usuario _usuario = usuarioService.inativar(id);
@@ -146,7 +146,7 @@ public class UsuarioController {
 		return new ResponseEntity<Usuario>(_usuario, HttpStatus.OK);
 	}
 	
-	@PutMapping("inativoPeloUsuario/{id}")
+	@PostMapping("inativoPeloUsuario/{id}")
 	public ResponseEntity<Usuario> inativarPeloUsuario(@PathVariable long id) {
 
 		Usuario _usuario = usuarioService.inativoPeloUsuario(id);
@@ -154,7 +154,7 @@ public class UsuarioController {
 		return new ResponseEntity<Usuario>(_usuario, HttpStatus.OK);
 	}
 
-	@PutMapping("reativar/{id}")
+	@PostMapping("reativar/{id}")
 	public ResponseEntity<Usuario> reativar(@PathVariable long id) {
 
 		Usuario _usuario = usuarioService.reativar(id);
@@ -162,7 +162,7 @@ public class UsuarioController {
 		return new ResponseEntity<Usuario>(_usuario, HttpStatus.OK);
 	}
 
-	@PutMapping("alterarSenha/{id}")
+	@PostMapping("alterarSenha/{id}")
 	public ResponseEntity<?> alterarSenha(
 			@PathVariable long id, @RequestBody Usuario usuario) {
 

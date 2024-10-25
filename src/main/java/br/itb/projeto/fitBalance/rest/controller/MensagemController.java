@@ -68,7 +68,7 @@ public class MensagemController {
 				.body(new MessageResponse("Mensagem enviada com sucesso!"));
 	}
 	
-	@PutMapping("ativar/{id}")
+	@PostMapping("ativar/{id}")
 	public ResponseEntity<Mensagem> ativar(@PathVariable long id) {
 
 		Mensagem _mensagem = mensagemService.ativar(id);
@@ -76,7 +76,7 @@ public class MensagemController {
 		return new ResponseEntity<Mensagem>(_mensagem, HttpStatus.OK);
 	}
 	
-	@PutMapping("inativar/{id}")
+	@PostMapping("inativar/{id}")
 	public ResponseEntity<Mensagem> inativar(@PathVariable long id) {
 
 		Mensagem _mensagem = mensagemService.inativar(id);
@@ -84,7 +84,7 @@ public class MensagemController {
 		return new ResponseEntity<Mensagem>(_mensagem, HttpStatus.OK);
 	}
 	
-	@PutMapping("marcarComoLida/{id}")
+	@PostMapping("marcarComoLida/{id}")
 	public ResponseEntity<Mensagem> marcarComoLida(@PathVariable long id) {
 
 		Mensagem _mensagem = mensagemService.marcarComoLida(id);

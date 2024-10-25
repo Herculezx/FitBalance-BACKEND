@@ -26,7 +26,17 @@ public class Mensagem {
 	private String telefone;
 	private String texto;
 	private String statusMensagem;
+
 	
+	
+	public Mensagem() {
+	}
+	public Mensagem(String emissorMensagem, String email, String telefone, String texto) {
+		this.emissorMensagem = emissorMensagem;
+		this.email = email;
+		this.telefone = telefone;
+		this.texto = texto;
+	}
 	public long getId() {
 		return id;
 	}

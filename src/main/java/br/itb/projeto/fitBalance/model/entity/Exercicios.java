@@ -53,6 +53,7 @@ public class Exercicios {
 	private Arquivo video;
 	
 	
+	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "exercicios")
 	@JsonManagedReference
 	private List<ExerciciosFeito> feitos; 
